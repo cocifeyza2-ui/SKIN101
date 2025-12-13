@@ -26,7 +26,7 @@
             <h1>CİLDİNİZİ GERÇEKTEN TANIYOR MUSUNUZ?</h1>
             <p>Doğru bakım, cilt tipini bilmekle başlar. Testi çöz, sana özel cilt bakım haritanı çıkaralım.</p>
 
-            <button class="btn-start">Testi Başlat</button>
+            <button class="btn-start" onclick="testiAc()">Testi Başlat</button>
 
             <div class="little-msg">
                 <span>✨ Sadece 1 dakikanı alır.</span>
@@ -94,7 +94,7 @@
                 <div class="routine-text">
                     <h2>DOĞAL GÜZELLİĞİNİ KEŞFET!</h2>
                     <p>En etkili cilt bakım rutinleriyle kendini şımartmanın tam zamanı.</p>
-                    <a href="#" class="btn-routine">Rutin Oluştur</a>
+                    <a href="rutinler.html" class="btn-routine">Rutin Oluştur</a>
                     <div class="routine-badges">
                         <div class="routine-badge">🌿 %100 Doğal</div>
                         <div class="routine-badge">🧪 Dermatolojik</div>
@@ -152,6 +152,30 @@
         </div>
     </section>
     <!--Wellness Section alanı bitiş-->
+
+    <!--Cilt tipi testi başlangıç-->
+    <div id="testModal" class="modalOverlay">
+        <div class="modalCard">
+            <button class="btn-close" onclick="testiKapat()"></button>
+            <div id="test-icerik">
+                <h1 id="ana-baslik">Cilt Tipi Testi</h1>
+                <h2 id="soru-baslik">Soru 1</h2>
+                <p id="soru-metni" class="question-text">Yüzünü yıkadıktan 30 dk sonra cildin nasıl hissediyor?</p>
+
+                <div class="options-grid" id="siklar-alani">
+                </div>
+            </div>
+
+            <div id="sonuc-ekrani" style="display: none;">
+                <div class="result-icon">✨</div>
+                <h2> Cilt Tipin: <span id="cilt-tipi-sonuc">...</span></h2>
+                <p id="cilt-aciklamasi">Senin cildin neme ihtiyaç duyuyor.</p>
+                <button class="btn-restart" onclick="testiYenidenBaslat()">Testi Tekrarla 🔄</button>
+                <a href="#rutinler" class="btn-go-routine" onclick="testiKapat()">Rutin Oluşturmaya Başla!</a>
+            </div>
+        </div>
+    </div>
+    <!--Cilt tipi testi bitiş-->
 
 
     <script>
@@ -276,6 +300,116 @@
             mesajGoster('Tebrikler! Günlük 8 bardak hedefine ulaştın. 🥳', 'basari');
         }
     }
+
+    // ---------------------------------------------------
+    // CİLT ANALİZ TESTİ KODLARI
+    // ---------------------------------------------------
+
+    
+const sorular = [
+    {
+        soru: "Yüzünü yıkadıktan 30 dakika sonra cildin nasıl hissediyor?",
+        siklar: [
+            { text: "Gergin ve pul pul dökülüyor", tip: "kuru" },
+            { text: "Her yeri parlıyor ve yağlı", tip: "yagli" },
+            { text: "T bölgesi (alın, burun) yağlı, yanaklar kuru", tip: "karma" },
+            { text: "Gayet rahat, ne kuru ne yağlı", tip: "normal" }
+        ]
+    },
+    {
+        soru: "Gözeneklerin aynada nasıl görünüyor?",
+        siklar: [
+            { text: "Neredeyse hiç görünmüyor", tip: "kuru" },
+            { text: "Büyük ve belirgin", tip: "yagli" },
+            { text: "Sadece burun çevresinde belirgin", tip: "karma" },
+            { text: "Normal görünüyor", tip: "normal" }
+        ]
+    },
+    {
+        soru: "Cildin sık sık kızarır veya kaşınır mı?",
+        siklar: [
+            { text: "Evet, yeni ürün denemeye korkarım", tip: "hassas" },
+            { text: "Hayır, cildim dayanıklıdır", tip: "normal" }
+        ]
+    }
+];
+
+let mevcutSoruIndex = 0;
+let puanlar = { kuru: 0, yagli: 0, karma: 0, normal: 0, hassas: 0 };
+
+function testiAc() {
+    document.getElementById('testModal').style.display = 'flex';
+    testiSifirla();
+}
+
+function testiKapat() {
+    document.getElementById('testModal').style.display = 'none';
+}
+
+function soruGoster() {
+    let soruObj = sorular[mevcutSoruIndex];
+    document.getElementById('soru-baslik').innerText = "Soru " + (mevcutSoruIndex + 1);
+    document.getElementById('soru-metni').innerText = soruObj.soru;
+    
+    let siklarAlani = document.getElementById('siklar-alani');
+    siklarAlani.innerHTML = ""; // Önceki şıkları temizle
+
+    soruObj.siklar.forEach(sik => {
+        let btn = document.createElement('button');
+        btn.innerText = sik.text;
+        btn.className = 'option-btn';
+        btn.onclick = function() { cevapVer(sik.tip); };
+        siklarAlani.appendChild(btn);
+    });
+}
+
+function cevapVer(tip) {
+    puanlar[tip]++; // Seçilen tipin puanını artır
+    
+    mevcutSoruIndex++; // Sonraki soruya geç
+
+    if (mevcutSoruIndex < sorular.length) {
+        soruGoster(); // Sorular bitmediyse yenisini göster
+    } else {
+        sonucuHesapla(); // Bittiyse sonucu göster
+    }
+}
+
+
+function sonucuHesapla() {
+    document.getElementById('test-icerik').style.display = 'none';
+    document.getElementById('sonuc-ekrani').style.display = 'block';
+
+    let kazananTip = Object.keys(puanlar).reduce((a, b) => puanlar[a] > puanlar[b] ? a : b);
+
+    let sonucBaslik = document.getElementById('cilt-tipi-sonuc');
+    let sonucAciklama = document.getElementById('cilt-aciklamasi');
+    
+    if(kazananTip === 'kuru') {
+        sonucBaslik.innerText = "KURU CİLT 🌵";
+        sonucAciklama.innerText = "Cildinin neme ihtiyacı var! Yoğun nemlendiriciler ve hyaluronik asit senin en iyi dostun.";
+    } else if(kazananTip === 'yagli') {
+        sonucBaslik.innerText = "YAĞLI CİLT 💧";
+        sonucAciklama.innerText = "Parlamayı kontrol altına almalısın. Su bazlı nemlendiriciler ve salisilik asit kullanmalısın.";
+    } else if(kazananTip === 'karma') {
+        sonucBaslik.innerText = "KARMA CİLT ⚖️";
+        sonucAciklama.innerText = "Denge senin için anahtar kelime! T bölgesini arındır, yanakları nemlendir.";
+    } else if(kazananTip === 'hassas') {
+        sonucBaslik.innerText = "HASSAS CİLT 🌸";
+        sonucAciklama.innerText = "Cildine nazik davranmalısın. Parfümsüz, alkolsüz ve yatıştırıcı içerikler seç.";
+    } else {
+        sonucBaslik.innerText = "NORMAL CİLT ✨";
+        sonucAciklama.innerText = "Şanslısın! Cildin dengeli. Bu dengeyi korumak için temel bakımı ihmal etme.";
+    }
+}
+
+function testiSifirla() {
+    mevcutSoruIndex = 0;
+    puanlar = { kuru: 0, yagli: 0, karma: 0, normal: 0, hassas: 0 };
+    document.getElementById('test-icerik').style.display = 'block';
+    document.getElementById('sonuc-ekrani').style.display = 'none';
+    soruGoster();
+}
 </script>
 </body>
 </html>
