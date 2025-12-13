@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKIN101</title>
-    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
     <!--Logo ve navbar kısmı başlangıç-->
@@ -14,8 +14,8 @@
             <li><a href="#ana-sayfa">Ana Sayfa</a></li>
             <li><a href="#tavsiyeler">Tavsiyeler</a></li>
             <li><a href="#rutinler">Rutinler</a></li>
-            <li><a href="#">Testler</a></li>
-            <li><a href="#">İletişim</a></li>
+            <li><a href="#denge">Denge</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
         </ul>
     </nav>
     <!--Logo ve navbar kısmı bitiş-->
@@ -64,7 +64,7 @@
                     <div class="icon">🍃</div>
                     <h3>Doğal Maskeler</h3>
                     <p>Evdeki malzemelerle yapabileceğin, cildini canlandıran tarifler.</p>
-                    <a href="#" class="read-more">Tarifleri Gör</a>
+                    <a href="dogal_maskeler.html" class="read-more">Tarifleri Gör</a>
                 </div>
 
                 <div class="info-card">
@@ -78,7 +78,7 @@
                     <div class="icon">💧</div>
                     <h3>Nemlendirme</h3>
                     <p>Cildinin neme doyacağı en doğru içerikleri öğren.</p>
-                    <a href="#" class="read-more">İpuçları</a>
+                    <a href="nemlendirme.html" class="read-more">İpuçları</a>
                 </div>
             </div>
         </div>
@@ -117,5 +117,165 @@
     </section>
     <!--Rutin Section alanı bitiş-->
 
+    <!--Wellness Section alanı başlangıç-->
+    <section class="wellnes-section" id="denge">
+        <div class="container">
+            <h2 class="wellnes-title">Kendini Tanı, Vücudunu Dengele!</h2>
+            <div class="wellnes-container">
+                <div class="wellnes-card bmi-card">
+                    <h3>🧘‍♀️ Vücut Kitle Endeksi</h3>
+                    <p>İdeal Kilonu Öğrenmek Bir Tık Uzağında!</p>
+                    <div class="input-area">
+                        <div class="input-group">
+                            <label>Boyun(cm): </label>
+                            <input type="number" id="boy" placeholder="Örn: 170">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Kilon(kg): </label>
+                            <input type="number" id="kilo" placeholder="Örn: 65">
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate" onclick="hesaplaBMI()">Hesapla!</button>
+                    <div id="bmiSonuc" class="result"></div>
+                </div>
+
+                <div class="wellnes-card water-card">
+                    <h2>💧 Günlük Su Takibi</h2>
+                    <div id="mesaj-alan" class="mesaj"></div>
+                    <button id="su-ekle-btn">Su İçtim!</button>
+                    <div id="bardaklar-kutu"> </div>  
+                    <p class="sayac-bilgi">Toplam: <span id="mevcut-sayi">0</span> / 8</p>
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!--Wellness Section alanı bitiş-->
+
+
+    <script>
+    // ---------------------------------------------------
+    // BMI HESAPLAMA KODU
+    // ---------------------------------------------------
+    function hesaplaBMI() {
+        let boy = document.getElementById("boy").value;
+        let kilo = document.getElementById("kilo").value;
+        let sonucKutu = document.getElementById("bmiSonuc");
+
+        if (boy > 0 && kilo > 0) {
+            let boyMetre = boy / 100;
+            let bmi = kilo / (boyMetre * boyMetre);
+            let bmiFix = bmi.toFixed(1);
+
+            let durum = "";
+            let renk = "";
+            
+            if (bmi < 18.5) { durum = "Zayıf"; renk = "#FF9800"; }
+            else if (bmi < 25) { durum = "İdeal Kilo ✨"; renk = "#4CAF50"; }
+            else if (bmi < 30) { durum = "Fazla Kilo"; renk = "#FF5722"; }
+            else { durum = "Obezite"; renk = "#D32F2F"; }
+
+            sonucKutu.innerHTML = `BMI: ${bmiFix} <br> <span style="color:${renk}">${durum}</span>`;
+        } else {
+            sonucKutu.innerText = "Lütfen değerleri girin!";
+        }
+    }
+
+    // ---------------------------------------------------
+    // SU TAKİPÇİSİ KODLARI
+    // ---------------------------------------------------
+    
+    const MAKS_BARDAK = 8;
+    const MIN_ARALIK_SURESI = 0.3 * 60 * 1000; // 30 saniye
+    const MAKS_TIKLAMA_SAYISI = 2;
+    const SIFIRLAMA_ARALIGI = 24 * 60 * 60 * 1000; // 24 saat
+
+    // Elementleri Seç
+    const suEkleBtn = document.getElementById('su-ekle-btn');
+    const bardaklarKutu = document.getElementById('bardaklar-kutu');
+    const mesajAlan = document.getElementById('mesaj-alan');
+    const mevcutSayiSpan = document.getElementById('mevcut-sayi');
+
+    let durum = durumuYukle();
+
+    function durumuYukle() {
+        const veri = localStorage.getItem('suTakipciDurumu');
+        if (veri) {
+            let yukluDurum = JSON.parse(veri);
+            const simdi = Date.now();
+            if (simdi - yukluDurum.sonSifirlama > SIFIRLAMA_ARALIGI) {
+                return { sayi: 0, tiklamaZamanlari: [], sonSifirlama: simdi };
+            }
+            return yukluDurum;
+        }
+        return { sayi: 0, tiklamaZamanlari: [], sonSifirlama: Date.now() };
+    }
+
+    function durumuKaydet() {
+        localStorage.setItem('suTakipciDurumu', JSON.stringify(durum));
+    }
+
+    function bardaklariGoster() {
+        bardaklarKutu.innerHTML = '';
+        for (let i = 0; i < durum.sayi; i++) {
+            const bardak = document.createElement('span');
+            bardak.classList.add('bardak-ikon');
+            bardak.innerHTML = '🥛';
+            bardaklarKutu.appendChild(bardak);
+        }
+        mevcutSayiSpan.textContent = durum.sayi;
+        durumuKaydet();
+    }
+
+    function mesajGoster(metin, tip = '') {
+        mesajAlan.textContent = metin;
+        mesajAlan.className = 'mesaj';
+        if (tip) { mesajAlan.classList.add(tip === 'uyari' ? 'uyari' : 'basari'); }
+        if (tip !== 'basari' && metin !== '') {
+            setTimeout(() => { mesajAlan.textContent = ''; mesajAlan.className = 'mesaj'; }, 3000);
+        }
+    }
+
+    function tiklamaGuvenliMi() {
+        const simdi = Date.now();
+        const sonTiklamalar = durum.tiklamaZamanlari.filter(zamanDamgasi => {
+            return simdi - zamanDamgasi < MIN_ARALIK_SURESI;
+        });
+        durum.tiklamaZamanlari = sonTiklamalar;
+        return sonTiklamalar.length < MAKS_TIKLAMA_SAYISI;
+    }
+
+    function suTiklamaIslemi() {
+        if (durum.sayi >= MAKS_BARDAK) {
+            mesajGoster('Tebrikler, günlük hedefine ulaştın! 🎉', 'basari');
+            return;
+        }
+        if (!tiklamaGuvenliMi()) {
+            mesajGoster('Yavaş ol! Suyu zamana yayarak içmelisin.', 'uyari');
+            return;
+        }
+        
+        const simdi = Date.now();
+        durum.sayi++;
+        durum.tiklamaZamanlari.push(simdi);
+
+        bardaklariGoster();
+        mesajGoster(`Harika! ${durum.sayi}. bardağın eklendi.`, 'basari');
+        
+        if (durum.sayi >= MAKS_BARDAK) {
+            mesajGoster('Tebrikler! Günlük 8 bardak hedefine ulaştın. 🥳', 'basari');
+        }
+    }
+
+    // Olay dinleyici
+    if(suEkleBtn) {
+        suEkleBtn.addEventListener('click', suTiklamaIslemi);
+        bardaklariGoster();
+        if (durum.sayi >= MAKS_BARDAK) {
+            mesajGoster('Tebrikler! Günlük 8 bardak hedefine ulaştın. 🥳', 'basari');
+        }
+    }
+</script>
 </body>
 </html>

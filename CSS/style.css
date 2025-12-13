@@ -361,3 +361,220 @@ body {
     opacity: 0.9;
     justify-content: center;
 }
+
+.wellnes-title {
+    text-align: center;
+    font-size: 36px;
+    color: #792fce;
+    margin-bottom: 50px;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.3px;
+    text-shadow: 0 4px 12px rgba(79, 124, 106, 0.35);
+}
+
+.wellnes-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #FFF0F5 0%, #E3F2FD 100%);
+}
+
+.wellnes-container {
+    display: flex;      
+    justify-content: center;
+    align-items: stretch;
+    gap: 50px;           
+    flex-wrap: wrap;     
+}
+
+.wellnes-card {
+    border-radius: 30px;
+    padding: 50px 30px;
+    width: 450px;       
+    min-height: 520px; 
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.8); 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.wellnes-card:hover {
+    transform: translateY(-5px);
+}
+
+.wellnes-card h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.wellnes-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.wellnes-card p {
+    font-size: 15px;
+    margin-bottom: 25px;
+    opacity: 0.8;
+}
+
+
+.bmi-card {
+    background: linear-gradient(135deg, #ffffff 0%, #F3E5F5 100%);
+    border-color: #E1BEE7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;  
+    text-align: center;
+}
+
+.bmi-card h3 {
+    color: #6A1B9A; 
+}
+
+.bmi-card p { 
+    color: #8E24AA; 
+}
+
+
+.input-area { 
+    display: flex; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+}
+
+.input-group { 
+    flex: 1; 
+    text-align: left; 
+}
+
+.input-group label { 
+    display: block; 
+    font-size: 13px; 
+    color: #6A1B9A; 
+    margin-bottom: 5px; 
+    font-weight: 600; 
+}
+
+.input-group input { 
+    width: 100%; 
+    padding: 12px; 
+    border: 2px solid #E1BEE7; 
+    border-radius: 12px; 
+    outline: none; 
+    background: rgba(255,255,255,0.9);
+    color: #4A148C; 
+    font-weight: bold; 
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #8E24AA; 
+}
+
+.btn-calculate {
+    width: 100%; 
+    padding: 15px; 
+    background-color: #8E24AA; 
+    color: white;
+    border: none; 
+    border-radius: 15px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
+}
+
+.btn-calculate:hover { 
+    background-color: #6A1B9A; 
+}
+
+.bmi-card .result { 
+    margin-top: 20px; 
+    font-weight: bold; 
+    color: #D81B60; 
+    height: 20px; 
+}
+
+.water-card {
+    background: linear-gradient(135deg, #ffffff 0%, #E3F2FD 100%);
+    border-color: #BBDEFB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;  
+    text-align: center;
+}
+
+.water-card h2 { 
+    color: #0D1B5E; 
+    font-weight: 700;
+}
+
+.water-card h3 { 
+    color: #0277BD; 
+}
+
+.water-card p { 
+    color: #039BE5; 
+}
+
+#su-ekle-btn {
+    background-color: #039BE5; 
+    color: white;
+    border: none; 
+    padding: 15px 25px; 
+    border-radius: 15px;
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer;
+    transition: 0.3s; 
+    width: 100%; 
+    margin-bottom: 20px;
+}
+
+#su-ekle-btn:hover { 
+    background-color: #0277BD; 
+}
+
+#bardaklar-kutu {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    min-height: 60px; 
+    margin-bottom: 15px;
+}
+
+.bardak-ikon { 
+    font-size: 2.5em; 
+    margin: 5px; 
+    color: #29B6F6; 
+    animation: fadeIn 0.5s ease-out; 
+}
+
+.mesaj { 
+    min-height: 25px; 
+    margin-bottom: 15px; 
+    font-weight: bold; 
+    font-size: 14px;
+}
+
+.mesaj.uyari { 
+    color: #F57C00; 
+}
+
+.mesaj.basari { 
+    color: #00C853; 
+}
+
+.sayac-bilgi { 
+    font-size: 1.1em; 
+    color: #455A64; 
+    font-weight: bold; 
+}
