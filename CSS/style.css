@@ -1002,3 +1002,211 @@ body {
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
 }
+
+
+
+/* Genel Sayfa Düzeni */
+body {
+    background-color: #fcfbf8; /* Çok açık krem / Kirli beyaz */
+    color: #3f3e3e; /* Koyu kahvemsi gri */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigasyon Stilleri */
+.main-header {
+    padding: 20px 50px;
+    background-color: #fff; /* Beyaz */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.main-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #55483d; /* Orta kahve */
+    font-weight: 500;
+    padding: 5px 0;
+}
+
+.nav-links .active {
+    color: #b08968; /* Yumuşak Bej / Kahve vurgu */
+    border-bottom: 2px solid #b08968;
+}
+
+/* Makaleler Ana İçerik */
+.articles-container {
+    padding: 40px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.articles-container h1 {
+    color: #a07a52; /* Daha koyu bej / Kahve Başlık rengi */
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: #837b74; /* Gri-Kahve alt yazı */
+    margin-bottom: 40px;
+}
+
+/* Makale Listesi ve Kartları */
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.article-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Yumuşak gölge */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article-card:hover {
+    transform: translateY(-5px); /* Hafif yukarı kayma efekti */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.article-card h2 {
+    color: #644933; /* Koyu Kahve Başlık */
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+.article-card p {
+    color: #555555;
+    line-height: 1.6;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 15px;
+    color: #b08968; /* Bej/Kahve vurgu */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Alt Bilgi */
+footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #f0e6da; /* Açık Bej sınır */
+    margin-top: 40px;
+    color: #999999;
+    font-size: 0.9em;
+}
+
+
+/* iletisim.css */
+
+/* Genel kapsayıcı ayarları */
+.contact-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ... (Diğer CSS Kodları Önceki Cevaptakiyle Aynıdır) ... */
+
+/* Gönder butonu stilleri */
+#submitBtn {
+    background-color: #f7a9a9; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+
+
+.main-nav ul li a.active {
+    background-color: #f7a9a9;
+    color: white;
+}
+
+
+
+header {
+    width: 100%;
+    /* Navbar'ın formun üstünde kalması için */
+    z-index: 20; 
+    background-color: white; /* Arka plan rengini tekrar beyaz yapma */
+    
+}
+
+/* Ana Navigasyon Çubuğu stili */
+.main-nav {
+    display: flex;
+    justify-content: space-between; /* Logo ve menü arasını aç */
+    align-items: center;
+    padding: 15px 80px; /* Kenarlardan boşluk ekle (contact-container ile hizalamak için) */
+    width: auto;
+}
+
+/* Navigasyon listesi */
+.main-nav ul {
+    list-style: none; /* Noktaları kaldır */
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Menü öğelerinin alt alta inmesini engelle */
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    background-color: #f7a9a9;
+    color: white;
+}
+
+/* Logo stili */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f7a9a9;
+}
+
+
+/* Footer'ın ekranın en altına sabitlenmesi */
+footer {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    z-index: 15; 
+}
