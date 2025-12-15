@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - SKIN101</title>
+    <link rel="stylesheet" href="CSS/style.css"> 
+    
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <span class="logo">SKIN101</span>
+            <ul>
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="tavsiyeler.html">Tavsiyeler</a></li>
+                <li><a href="rutinler.html">Rutinler</a></li>
+                <li><a href="denge.html">Denge</a></li>
+                <li><a href="makaleler.html">Makaleler</a></li>
+                <li><a href="iletisim.html" class="active">İletişim</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contact-container">
+        <h1>Bize Ulaşın</h1>
+        <p>Sorularınız, önerileriniz veya işbirliği talepleriniz için aşağıdaki formu doldurarak bize ulaşabilirsiniz. En kısa sürede size geri dönüş yapacağız.</p>
+
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Adınız Soyadınız:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-posta Adresiniz:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Konu:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Mesajınız:</label>
+                <textarea id="message" name="message" rows="1" required></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Gönder</button>
+        </form>
+
+        <div class="contact-info">
+            <h2>Doğrudan İletişim Bilgileri</h2>
+            <p><strong>E-posta:</strong> info@skin101.com</p>
+            <p><strong>Telefon:</strong> +90 555 123 45 67</p>
+            <p><strong>Adres:</strong> Örnek Mahallesi, Deneme Sokak No: 1, İstanbul, Türkiye</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SKIN101. Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            // Formun gerçekten gönderilmesini engelle
+            event.preventDefault(); 
+            
+            alert('Mesajınız başarıyla gönderildi! Teşekkür ederiz.');
+            
+            // Formu temizle
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+
+</body>
+</html>
