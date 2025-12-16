@@ -178,6 +178,99 @@
     </div>
     <!--Cilt tipi testi bitiş-->
 
+    <!--Makaleler kısmı başlangıç-->
+    <section id="makale" class="makaleler-wrapper">
+    
+    <div class="articles-container">
+        <h3>Makaleler</h3>
+        <p class="subtitle">En son trendler, bilimsel bilgiler ve pratik ipuçları.</p>
+
+        <div class="article-list">
+            
+            <article class="article-card">
+                <h2>Güneşten Korunma</h2>
+                <p>Güneşten koruyucular D vitamini sentezini etkiler mi?</p>
+                <p>Yazan: Türk Dermatoloji Derneği</p>
+                <a href="https://turkdermatoloji.org.tr/media/hasta_bilgilendirme/gunesten_korunma.pdf" class="read-more">Devamını Oku →</a>
+            </article>
+
+            <article class="article-card">
+                <h2>Bağırsak ve Cilt Sağlığı: Önemli Bilgiler</h2>
+                <p>Bağırsak sağlığını iyileştirmek, cilt sorunlarını azaltmanın...</p>
+                <p>Yazan: Dr. Didem Gülmez</p>
+                <a href="https://doktordidemgulmez.com/bagirsak-cilt-baglantisi-akne-ve-cilt-sorunlarinin-gercek-nedeni" class="read-more">Devamını Oku →</a>
+            </article>
+
+            <article class="article-card">
+                <h2>Sağlık Gerçekleri</h2>
+                <p>Louis Vuitton’dan Türkiye Sağlık Ekosistemine...</p>
+                <p>Yazan: Dr. Murat Balaban</p>
+                <a href="https://www.saglik.org.tr/yazilar/saglik-gercekleri-louis-vuitton-dan-turkiye-saglik-ekosistemine-marka-degeri-yaratmanin-anatomisi" class="read-more">Devamını Oku →</a>
+            </article>
+        </div>
+    </div>
+    </section>
+    <!--Makaleler kısmı bitiş-->
+
+    <!--iletisim kısmı baslangıç-->
+    <section id="iletisim" class="clean-contact-section">
+    <div class="contact-card-wide">
+        
+        <div class="contact-image-side">
+            <img src="images/urunler.png" alt="bakim-urunleri">
+            <div class="overlay-text">
+                <h3>Bizimle Tanışın</h3>
+                <p>Sorularınız, önerileriniz veya sadece merhaba demek için...</p>
+            </div>
+        </div>
+
+        <div class="contact-form-side">
+            <div class="form-header">
+                <h2>Bize Ulaşın</h2>
+                <p>Aşağıdaki formu doldurun, en kısa sürede dönüş yapalım.</p>
+            </div>
+
+            <form id="contactForm">
+                <div class="input-row">
+                    <div class="form-group icon-input">
+                        <input type="text" id="name" placeholder="Ad Soyad">
+                        <span class="icon user"></span>
+                    </div>
+                    <div class="form-group icon-input">
+                        <input type="email" id="email" placeholder="E-posta Adresi">
+                        <span class="icon mail"></span>
+                    </div>
+                </div>
+
+                <div class="form-group icon-input">
+                    <input type="text" id="subject" placeholder="Konu Başlığı">
+                    <span class="icon edit"></span>
+                </div>
+
+                <div class="form-group icon-input">
+                    <textarea id="message" placeholder="Mesajınızı buraya yazın..."></textarea>
+                    <span class="icon message"></span>
+                </div>
+
+                <button type="submit" id="submitBtn">Gönder</button>
+            </form>
+            
+            <div class="contact-footer">
+                <span>📧 info@skin101.com</span>
+                <span>📞 +90 555 123 45 67</span>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!--iletisim kısmı bitiş-->
+
+    <!--footer alanı başlangıc-->
+    <footer>
+        <p>&copy; 2025 SKIN101. Tüm Hakları Saklıdır.</p>
+    </footer>
+    <!--footer alanı bitiş-->
+
+
 
     <script>
     // ---------------------------------------------------
@@ -411,6 +504,11 @@ function testiSifirla() {
     document.getElementById('sonuc-ekrani').style.display = 'none';
     soruGoster();
 }
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {event.preventDefault(); //formun gercekten gönderilmesini engelle ve temizle
+    alert('Mesajınız başarıyla gönderildi! Teşekkür ederiz.');
+        document.getElementById('contactForm').reset();
+});
 </script>
 </body>
 </html>
