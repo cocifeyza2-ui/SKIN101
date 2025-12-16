@@ -1238,7 +1238,7 @@ body {
     box-shadow: 0 5px 15px rgba(184, 74, 118, 0.1);
 }
 
-.icon {
+.form-group .icon {
     position: absolute;
     top: 18px;
     left: 18px;
@@ -1254,10 +1254,10 @@ body {
     opacity: 1;
 }
 
-.icon.user::before { content: '👤'; }
-.icon.mail::before { content: '📧'; }
-.icon.edit::before { content: '🖊️'; }
-.icon.message::before { content: '💬'; }
+.form-group .icon.user::before { content: '👤'; }
+.form-group .icon.mail::before { content: '📧'; }
+.form-group .icon.edit::before { content: '🖊️'; }
+.form-group .icon.message::before { content: '💬'; }
 
 #submitBtn {
     width: 100%;
